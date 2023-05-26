@@ -25,8 +25,13 @@ def count_tokens(messages):
 @bot.message_handler(text_startswith="!")
 def start_filter(message):
     logging.info(f"{message.from_user.username}: {message.text}")
-    logging.info(f"{message.from_user.username} tokens: {count_tokens(userMessages[message.from_user.username])}")
-    print(message.from_user.id)
+    try:
+        count = count_tokens(userMessages[message.from_user.username])
+    except:
+        count = 0
+    
+    logging.info(f"{message.from_user.username} tokens: {0}")
+
     if message.text.startswith("!generate "):
         prompt = message.text[10:]
         try:
@@ -84,9 +89,10 @@ bot.add_custom_filter(custom_filters.TextStartsFilter())
 if __name__ == "__main__":
     bot.send_message(496270846, "bot deployed")
     import asyncio
-    while True:
-        try:
-            asyncio.run(bot.polling(skip_pending=True))
-        except Exception as e:
-            logging.error(e)
-            bot.send_message(496270846, "fuckin bitch crashed, trying to reboot")
+    asyncio.run(bot.polling(skip_pending=True))
+    # while True:
+    #     try:
+    #         asyncio.run(bot.polling(skip_pending=True))
+    #     except Exception as e:
+    #         logging.error(e)
+    #         bot.send_message(496270846, "fuckin bitch crashed, trying to reboot")
