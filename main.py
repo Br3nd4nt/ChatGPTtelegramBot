@@ -89,10 +89,9 @@ bot.add_custom_filter(custom_filters.TextStartsFilter())
 if __name__ == "__main__":
     bot.send_message(496270846, "bot deployed")
     import asyncio
-    asyncio.run(bot.polling(skip_pending=True))
-    # while True:
-    #     try:
-    #         asyncio.run(bot.polling(skip_pending=True))
-    #     except Exception as e:
-    #         logging.error(e)
-    #         bot.send_message(496270846, "fuckin bitch crashed, trying to reboot")
+    while True:
+        try:
+            asyncio.run(bot.polling(skip_pending=True))
+        except Exception as e:
+            logging.error(e)
+            bot.send_message(496270846, "fuckin bitch crashed, trying to reboot")
