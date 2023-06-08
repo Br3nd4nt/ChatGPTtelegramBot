@@ -19,7 +19,7 @@ def count_tokens(messages):
     tokens = 0
     for message in messages:
         if message["role"] == "user":
-            tokens += len(message["content"].split(" "))
+            tokens += len(message["content"])
     return tokens
 
 @bot.message_handler(text_startswith="!")
@@ -30,7 +30,7 @@ def start_filter(message):
     except:
         count = 0
     
-    logging.info(f"{message.from_user.username} tokens: {0}")
+    logging.info(f"{message.from_user.username} tokens: {count}")
 
     if message.text.startswith("!generate "):
         prompt = message.text[10:]
@@ -49,17 +49,18 @@ def start_filter(message):
 
     else:
         try:
-            if 1:
+            if 1: #just for testing
                 try:
                     messages = userMessages[message.from_user.username]
                 except KeyError:
                     messages = []
                 
+                messages.append({"role": "user", "content": message.text[1:]})
+
                 while count_tokens(messages) > 4000:
                     messages.pop(0)
                     messages.pop(0)
                 
-                messages.append({"role": "user", "content": message.text[1:]})
                 completions = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo", 
                 messages=messages
