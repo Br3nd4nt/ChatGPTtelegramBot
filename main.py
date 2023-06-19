@@ -18,8 +18,7 @@ userMessages = dict()
 def count_tokens(messages):
     tokens = 0
     for message in messages:
-        if message["role"] == "user":
-            tokens += len(message["content"])
+        tokens += len(message["content"])
     return tokens
 
 @bot.message_handler(text_startswith="!")
@@ -57,7 +56,7 @@ def start_filter(message):
                 
                 messages.append({"role": "user", "content": message.text[1:]})
 
-                while count_tokens(messages) > 4000:
+                while count_tokens(messages) > 3000:
                     messages.pop(0)
                     messages.pop(0)
                 
