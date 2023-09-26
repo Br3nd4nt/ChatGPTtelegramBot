@@ -12,7 +12,6 @@ import asyncio
 #setuping
 logging.basicConfig(level=logging.INFO, filename="bot.log",filemode="a", format='(%(asctime)s %(levelname)s) - %(message)s')
 openai.api_key = os.environ.get('openaiToken')
-openai.api_key = "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"
 tgToken = os.environ.get('telegramToken')
 bot = telebot.TeleBot(tgToken)
 userMessages = defaultdict(list)
