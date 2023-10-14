@@ -1,10 +1,5 @@
-os
 telebot
-telebot
-logging
 openai
-PIL
+Pillow
 numpy
-shutil
-collections
 asyncio
