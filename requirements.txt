@@ -1,2 +1,10 @@
+os
 telebot
+telebot
+logging
 openai
+PIL
+numpy
+shutil
+collections
+asyncio
