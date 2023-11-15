@@ -159,11 +159,5 @@ bot.add_custom_filter(custom_filters.TextStartsFilter())
 
 if __name__ == "__main__":
     bot.send_message(496270846, "bot deployed")
-    async def polling_with_timeout(timeout):
-        while True:
-            try:
-                await asyncio.wait_for(bot.polling(skip_pending=True), timeout=timeout)
-            except asyncio.TimeoutError:
-                print("bruh i love telegram servers")
-
-    asyncio.run(polling_with_timeout(timeout=10))
+    bot.infinity_polling(timeout=30, long_polling_timeout = 5)
+    
