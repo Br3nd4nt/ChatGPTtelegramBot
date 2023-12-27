@@ -109,6 +109,7 @@ def count_tokens(messages):
     return tokens
 
 @bot.message_handler(text_startswith="!")
+@bot.message_handler(func=lambda message: message.chat.type == 'private')
 def start_filter(message):
     logging.info(f"{message.from_user.username}: {message.text}")
     count = count_tokens(userMessages[message.from_user.username])
@@ -138,7 +139,7 @@ def start_filter(message):
 
     else:
         try:
-            userMessages[message.from_user.username].append({"role": "user", "content": message.text[1:]})
+            userMessages[message.from_user.username].append({"role": "user", "content": message.text[0 if message.chat.type == 'private' else 1:]})
 
             while count_tokens(userMessages[message.from_user.username]) > 3000:
                 userMessages[message.from_user.username].pop(0)
