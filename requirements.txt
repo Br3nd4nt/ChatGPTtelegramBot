@@ -1,5 +1,3 @@
 telebot
-openai
-Pillow
-numpy
 asyncio
+google-generativeai
